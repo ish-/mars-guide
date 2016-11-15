@@ -6,6 +6,8 @@ import location from 'services/location'
 import beacons from 'services/beacons'
 import wifi from 'services/wifi'
 
+import notifications, {NOT_IN_PLACE} from 'services/notifications'
+
 import {MOCK_RANGING_AVAILABLE} from 'config'
 
 var _lang = localStorage.getItem('lang') || (/ru/i.test(window.navigator.language) ? 'RU' : 'EN')
@@ -42,6 +44,7 @@ var Shared = new Vue ({
 
       if (available.length) {
         clearTimeout(inPlaceTimeout)
+        inPlaceTimeout = null
         return this.inPlace = true
       }
 
@@ -50,6 +53,7 @@ var Shared = new Vue ({
       inPlaceTimeout = setTimeout(() => {
         if (!this.beacons.available.length)
           this.inPlace = false
+          notifications.add(NOT_IN_PLACE)
       }, 10000)
     }
   },

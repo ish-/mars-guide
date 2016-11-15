@@ -5,6 +5,8 @@ import VideoPlayer from 'components/VideoPlayer'
 import Sensors from 'components/Sensors'
 import Feedback from 'components/Feedback'
 import Spinner from 'components/spinner'
+import Notifications from 'components/Notifications'
+import notifications, {VIDEO_MIMPI} from 'services/notifications'
 
 import {MOCK_CURRENT_BEACON} from 'config'
 
@@ -17,7 +19,7 @@ export default {
     }
   },
   components: {
-    VideoPlayer, Sensors, Feedback, Spinner
+    VideoPlayer, Sensors, Feedback, Spinner, Notifications
   },
   // created: function () {
   //   var that = this
@@ -27,6 +29,16 @@ export default {
       var videoName
       if (!beacon || !(videoName = config.BEACON_VIDEO_MAP[beacon.minor]))
         return
+      if (videoName === 'mimpi') {
+        var mimpiNotification = Object.assign({}, VIDEO_MIMPI)
+        mimpiNotification.action.cb = () => {
+          this.$refs.player.pause()
+          cordova.InAppBrowser.open('http://10.1.2.197', '_blank', 'location=no')
+        }
+        setTimeout(() => {
+          notifications.add(VIDEO_MIMPI)
+        }, 3000)
+      }
       this.setVideoUrl(videoName)
     },
     setVideoUrl (videoName, lang = Shared.language) {
@@ -82,10 +94,11 @@ export default {
     ref='player',
     :url="$.rangingAvailable && videoUrl",
     @click-feedback="showFeedback = true")
+  notifications
   transition(name="opacity")
     spinner(
       v-if="$.rangingAvailable && !$.beacons.current.minor",
-      :alt="$.inPlace ? $.l['SEARCHING'] : $.l['NOT_IN_PLACE']")
+      :alt="$.l['SEARCHING']")
   transition(name="translate-from-left", appear)
     sensors(v-if="!$.rangingAvailable")
   transition(name="translate-from-down")
@@ -110,6 +123,10 @@ export default {
 
     
 #app 
+  > .c-notifications
+      absolute: top 10px left 10px right 10px
+      z-index: 150
+
   > .c-sensors
     size: 68px 136px
     absolute: top 50% left 10px
@@ -120,7 +137,8 @@ export default {
     absolute: left 50% top 50%
     margin-top: -5px
     margin-left: -5px  
-    z-index: 101
+    #app > &
+      z-index: 99
     
     &:after
       position: absolute
