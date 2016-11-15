@@ -1,0 +1,98 @@
+// @import 'fonts.styl'
+
+*
+  margin: 0
+  padding: 0
+  outline: none
+  border: 0
+  box-sizing: border-box
+  user-select: none
+  
+input, textarea
+  user-select: auto
+  
+html
+  min-height: 100%
+  height: 100%
+  overflow: hidden
+  font-family-default()
+  
+body
+  
+  -webkit-touch-callout: none                /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none             /* prevent webkit from resizing text to fit */
+  -webkit-user-select: none                  /* prevent copy paste, to allow, change 'none' to 'text' */
+  overflow-y: auto
+  min-height: 100%
+  height: 100%
+  absolute: top left right bottom
+  padding: 0 $page-padding 0 $page-padding
+
+  color: white
+  background-color: black;
+  
+  -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+li
+  list-style: none
+  
+label[for]
+  cursor: pointer
+  
+input:focus::-webkit-input-placeholder
+  color: transparent
+input:focus::input-placeholder
+  color: transparent
+
+input
+  font-family-default()
+  
+*
+  &::-webkit-media-controls,
+  &::-webkit-media-controls-panel,
+  &::-webkit-media-controls-start-playback-button,
+  &::-webkit-media-controls-play-button
+  &::-webkit-slider-thumb,
+  &::-webkit-media-controls-enclosure
+    display: none!important
+    -webkit-appearance: none
+  
+svg
+  pointer-events: none
+  
+.u-relative
+  position: relative
+  
+.u-user-select
+  user-select: auto
+  
+.u-iblock
+  display: inline-block
+  
+.u-clear
+  clear: both
+  
+.u-invisible
+  opacity: 0
+  pointer-events: none
+  
+.o-clickable
+  cursor: pointer
+  
+.o-center
+  text-align: center
+  
+.o-btn
+  background: transparent
+  cursor: pointer
+  display: inline-block
+  
+  &__action
+    border-radius: 4px
+    background-color: #007aff
+    padding: 10px 15px
+    font-size: 19px
+    color: white
+  
+@import 'transitions.styl'

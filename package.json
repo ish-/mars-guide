@@ -1,0 +1,39 @@
+{
+  "name": "mars-guide",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "copy": "cp -R ./src/res ./dist/",
+    "build": "npm run copy && webpack",
+    "dev": "npm run copy && export NODE_ENV='development' && webpack -w"
+  },
+  "author": "ISh- (imwaves@gmail.com)",
+  "license": "ISC",
+  "dependencies": {
+    "fastclick": "^1.0.6",
+    "vue": "^2.0.3"
+  },
+  "devDependencies": {
+    "apply-loader": "^0.1.0",
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "css-loader": "^0.25.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-loader": "^0.4.4",
+    "nib": "^1.1.2",
+    "pug": "^2.0.0-beta6",
+    "pug-loader": "^2.3.0",
+    "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-inline-webpack": "^1.0.0",
+    "stylus-loader": "^2.3.1",
+    "svg-url-loader": "^1.1.0",
+    "vue-html-loader": "^1.2.3",
+    "vue-loader": "^9.7.0",
+    "vue-style-loader": "^1.0.0",
+    "webpack": "^1.13.2"
+  }
+}
