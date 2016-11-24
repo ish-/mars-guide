@@ -38,8 +38,11 @@ export default {
       if (this.$currentVideo) {
         this.stop()
       }
+        
       this.loading = true
       var $video = document.createElement('VIDEO')
+      if (/video\.mp4$/.test(url))
+        $video.loop = true
       this.seek = 0
       this.$currentVideo = $video
       $video.controls = false
@@ -97,12 +100,14 @@ export default {
     _onTimeupdate () {
       var $video = this.$currentVideo
       this.seek = $video.currentTime / $video.duration
-      if ($video.currentTime === $video.duration) {
+      if ($video.currentTime === $video.duration && !$video.loop) {
         this.playing = false
         this.ended = true
       }
     },
     _onWaiting () {
+      if (this.$currentVideo.currentTime === this.$currentVideo.duration)
+        return
       this.loading = true
       this.setLoadingTimeout(config.VIDEO_LOADING_TIMEOUT * 3)
     },
