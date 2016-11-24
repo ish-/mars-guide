@@ -27,9 +27,9 @@ cordova.on('backbutton', function () {
 
 cordova.ready(function onCordovaReady () {
   // navigator.splashscreen.hide()
-  window.screen.lockOrientation('landscape')
-  cordova.plugins.backgroundMode.setDefaults({silent: true})
-  cordova.plugins.backgroundMode.enable()
+  window.screen.lockOrientation('landscape-primary')
+  // cordova.plugins.backgroundMode.setDefaults({silent: true})
+  // cordova.plugins.backgroundMode.enable()
   AndroidFullScreen.immersiveMode()
   cordova._ready = true
 })
