@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "copy": "cp -R ./src/res ./dist/",
-    "build": "npm run copy && webpack",
+    "build": "npm run copy && export NODE_ENV='production' && webpack",
     "dev": "npm run copy && export NODE_ENV='development' && webpack -w"
   },
   "author": "ISh- (imwaves@gmail.com)",
