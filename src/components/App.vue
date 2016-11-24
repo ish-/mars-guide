@@ -7,8 +7,11 @@ import Feedback from 'components/Feedback'
 import Spinner from 'components/spinner'
 import Notifications from 'components/Notifications'
 import notifications, {VIDEO_MIMPI} from 'services/notifications'
+import _ from 'utils'
 
-import {MOCK_CURRENT_BEACON} from 'config'
+import {MOCK_CURRENT_BEACON, IS_IOS} from 'config'
+
+var mimpiNotificationHide = _.noop
 
 export default {
   data () {
@@ -33,11 +36,13 @@ export default {
         var mimpiNotification = Object.assign({}, VIDEO_MIMPI)
         mimpiNotification.action.cb = () => {
           this.$refs.player.pause()
-          cordova.InAppBrowser.open('http://10.1.2.197', '_blank', 'location=no')
+          cordova.InAppBrowser.open('http://10.1.2.197', (IS_IOS ? '_system' : '_blank'), 'location=no')
         }
         setTimeout(() => {
-          notifications.add(VIDEO_MIMPI)
-        }, 3000)
+          mimpiNotificationHide = notifications.add(VIDEO_MIMPI)
+        }, 1000)
+      } else {
+        mimpiNotificationHide()
       }
       this.setVideoUrl(videoName)
     },

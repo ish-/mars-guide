@@ -11,7 +11,7 @@ export default {
       this.arr.splice(0, 1)
     },
     action (n) {
-      this.close()
+      // this.close()
       n.action.cb()
     },
   }
@@ -24,7 +24,7 @@ export default {
   .c-notifications__notify(ref="notify")
     span.c-notifications__notify-text {{$.l[arr[0].text]}}
     span.c-notifications__notify-close(v-if="!arr[0].preventClose", @click="close()") {{$.l['HIDE']}}
-    span.c-notifications__notify-action(v-if="arr[0].action", @click="action(n)") {{$.l[arr[0].action.text]}}
+    span.c-notifications__notify-action(v-if="arr[0].action", @click="action(arr[0])") {{$.l[arr[0].action.text]}}
 
 </template>
 <style lang="stylus">

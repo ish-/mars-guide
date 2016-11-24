@@ -11,6 +11,10 @@ var notifications = new Vue({
         setTimeout(() => {
           this.arr.splice(this.arr.indexOf(n), 1)
         }, n.autoclose === true ? AUTOCLOSE_TIMEOUT : n.autoclose)
+      return this.close.bind(this, n)
+    },
+    close (n) {
+      this.arr.splice(this.arr.indexOf(n), 1)
     }
   }
 })
