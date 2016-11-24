@@ -17,7 +17,7 @@ var Shared = new Vue ({
     location, bluetooth, beacons, wifi,
     language: _lang,
     l: language[_lang],
-    paused: false,
+    appPaused: false,
     online: false,
     inPlace: true,
     config,
@@ -70,8 +70,8 @@ var Shared = new Vue ({
       beacons.init()
     })
 
-    cordova.on('pause', () => this.paused = true)
-    cordova.on('resume', () => this.paused = false)
+    cordova.on('pause', () => this.appPaused = true)
+    cordova.on('resume', () => this.appPaused = false)
 
     cordova.on('online', () => this.online = true)
     cordova.on('offline', () => this.online = false)
